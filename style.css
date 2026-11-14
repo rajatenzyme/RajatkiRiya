@@ -772,6 +772,36 @@ footer {
 .footer-date { font-size: 0.78rem; letter-spacing: 0.15em; margin-bottom: 0.8rem; }
 .footer-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: rgba(240,208,144,0.35); }
 
+/* ===== MOBILE PHOTO STRIP ===== */
+#mobile-photostrip {
+  display: none; /* shown only on mobile via media query */
+}
+
+@media (max-width: 600px) {
+  #mobile-photostrip {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    gap: 10px;
+    padding: 1.4rem 1rem 1.8rem;
+    background: #0d0400;
+    scrollbar-width: none;
+    align-items: center;
+  }
+  #mobile-photostrip::-webkit-scrollbar { display: none; }
+  #mobile-photostrip img {
+    width: 160px;
+    height: 215px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    transform: rotate(var(--rot, 0deg));
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+  }
+}
+
 /* ===== BLESSING TICKER ===== */
 .blessing-ticker {
   overflow: hidden;
@@ -1048,8 +1078,8 @@ footer {
   .hero-sub   { font-size: 0.6rem; }
   .hero-invite{ font-size: 0.68rem; }
 
-  /* Collage on mobile: corner peeks handled in JS, keep container visible */
-  #photo-collage { display: block; }
+  /* Hero collage wings hidden on mobile — photos shown in strip below hero instead */
+  #photo-collage { visibility: hidden; }
 
   /* Countdown */
   .countdown     { gap: 0.15rem; margin: 1.6rem 0 1.4rem; }

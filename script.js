@@ -23,20 +23,17 @@ window.addEventListener('load', function () {
   const isMobile = window.innerWidth <= 600;
 
   if (isMobile) {
-    // Mobile: show 4 small photos peeking at corners — 2 top, 2 bottom
-    const corners = [
-      { top: -20,          left: -30,          rot: 15,  w: 130, photo: 0 },
-      { top: -20,          left: heroW - 100,  rot: -12, w: 120, photo: 2 },
-      { top: heroH - 100,  left: -25,          rot: -10, w: 125, photo: 4 },
-      { top: heroH - 90,   left: heroW - 110,  rot: 14,  w: 130, photo: 6 % photos.length },
-    ];
-    corners.forEach(({ top, left, rot, w, photo }) => {
-      const img = document.createElement('img');
-      img.src   = photos[photo];
-      const h   = w * 1.3;
-      img.style.cssText = `width:${w}px;height:${h}px;top:${top}px;left:${left}px;transform:rotate(${rot}deg);opacity:0.85;`;
-      container.appendChild(img);
-    });
+    // Mobile: populate the horizontal strip below the hero instead
+    const strip = document.getElementById('mobile-photostrip');
+    if (strip) {
+      photos.forEach((src, i) => {
+        const img = document.createElement('img');
+        img.src = src;
+        const rots = [3, -4, 2, -3, 5, -2, 4];
+        img.style.setProperty('--rot', rots[i % rots.length] + 'deg');
+        strip.appendChild(img);
+      });
+    }
     return;
   }
 
