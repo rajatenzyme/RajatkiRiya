@@ -327,8 +327,12 @@
   <button id="music-btn" title="Play music">
     <span id="music-icon">♫</span>
   </button>
-  <!-- Hidden YouTube player (replaced by API) -->
-  <div id="yt-player"></div>
+  <!-- Hidden YouTube iframe — enablejsapi lets JS control play/pause -->
+  <iframe id="yt-frame"
+    src="https://www.youtube.com/embed/3NIU8HwqGbk?start=20&enablejsapi=1&autoplay=0&loop=1&playlist=3NIU8HwqGbk&controls=0&rel=0&fs=0"
+    allow="autoplay; encrypted-media"
+    style="position:fixed;left:-9999px;top:-9999px;width:200px;height:200px;border:0;pointer-events:none;">
+  </iframe>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>

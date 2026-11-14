@@ -469,43 +469,14 @@ function handleRSVP(e) {
 
 
 // ===== BACKGROUND MUSIC =====
-var ytPlayer    = null;
-var musicReady  = false;
-var musicOn     = false;
+var musicOn  = false;
+var ytFrame  = document.getElementById('yt-frame');
 
-// Inject YouTube IFrame API
-(function () {
-  var s = document.createElement('script');
-  s.src = 'https://www.youtube.com/iframe_api';
-  document.head.appendChild(s);
-})();
-
-// Called automatically by the API when ready
-function onYouTubeIframeAPIReady() {
-  ytPlayer = new YT.Player('yt-player', {
-    videoId: '3NIU8HwqGbk',
-    playerVars: {
-      start:    20,
-      autoplay: 0,
-      loop:     1,
-      playlist: '3NIU8HwqGbk',
-      controls: 0,
-      disablekb: 1,
-      fs: 0,
-      rel: 0,
-    },
-    events: {
-      onReady: function (e) {
-        musicReady = true;
-        e.target.setVolume(65);
-        // Don't autoplay — user must click ♫ button (browser policy blocks autoplay with sound)
-      },
-      onStateChange: function (e) {
-        musicOn = e.data === YT.PlayerState.PLAYING;
-        updateMusicBtn();
-      },
-    },
-  });
+function ytCmd(func) {
+  if (!ytFrame) return;
+  ytFrame.contentWindow.postMessage(
+    JSON.stringify({ event: 'command', func: func, args: [] }), '*'
+  );
 }
 
 function updateMusicBtn() {
@@ -524,6 +495,7 @@ function updateMusicBtn() {
 }
 
 document.getElementById('music-btn').addEventListener('click', function () {
-  if (!ytPlayer || !musicReady) return;
-  musicOn ? ytPlayer.pauseVideo() : ytPlayer.playVideo();
+  musicOn = !musicOn;
+  ytCmd(musicOn ? 'playVideo' : 'pauseVideo');
+  updateMusicBtn();
 });

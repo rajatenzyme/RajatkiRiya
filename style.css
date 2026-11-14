@@ -803,15 +803,6 @@ section { padding: 6rem 2rem; position: relative; z-index: 1; }
   50%       { box-shadow: 0 0 22px rgba(245,200,66,0.55); }
 }
 
-/* YouTube hidden container */
-#yt-player {
-  position: fixed;
-  left: -9999px;
-  top: -9999px;
-  width: 1px;
-  height: 1px;
-  pointer-events: none;
-}
 
 /* ===== FOOTER ===== */
 footer {
