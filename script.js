@@ -472,6 +472,14 @@ function handleRSVP(e) {
 var bgAudio = document.getElementById('bg-audio');
 bgAudio.volume = 0.65;
 
+// Seek to 20s once audio metadata is loaded
+bgAudio.addEventListener('loadedmetadata', function () {
+  bgAudio.currentTime = 20;
+});
+
+// Attempt autoplay — browsers may block it silently; button always works as fallback
+bgAudio.play().catch(function () {});
+
 function updateMusicBtn() {
   var btn  = document.getElementById('music-btn');
   var icon = document.getElementById('music-icon');
