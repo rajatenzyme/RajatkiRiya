@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rajat &amp; Riya | December 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <ul>
+      <li><a href="#wedding">Wedding</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#mantras">Blessings</a></li>
+      <li><a href="#venue">Venue</a></li>
+      <li><a href="#rsvp">RSVP</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <!-- Photo collage wings — populated by JS -->
+    <div id="photo-collage"></div>
+    <canvas id="petals"></canvas>
+    <div class="mandala mandala-left"></div>
+    <div class="mandala mandala-right"></div>
+
+    <div class="hero-content">
+      <div class="hero-frame">
+        <span class="corner corner-tl"></span>
+        <span class="corner corner-tr"></span>
+        <span class="corner corner-bl"></span>
+        <span class="corner corner-br"></span>
+        <p class="hero-sub">Together with their families</p>
+        <h1 class="hero-names">
+          <span class="name-bride">Rajat</span>
+          <span class="ampersand">&amp;</span>
+          <span class="name-groom">Riya</span>
+        </h1>
+        <p class="hero-invite">invite you to celebrate their union</p>
+      </div>
+
+      <div class="countdown" id="countdown">
+        <div class="cd-unit"><span id="cd-days">00</span><small>Days</small></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><span id="cd-hours">00</span><small>Hours</small></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><span id="cd-minutes">00</span><small>Mins</small></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><span id="cd-seconds">00</span><small>Secs</small></div>
+      </div>
+
+      <div class="scratch-wrapper">
+        <p class="scratch-hint">&#10022; Scratch to reveal the date &#10022;</p>
+        <div class="scratch-container">
+          <div id="dateReveal">December 2, 2026</div>
+          <canvas id="scratchCard" width="300" height="90"></canvas>
+        </div>
+      </div>
+
+      <a href="#wedding" class="cta-btn">View Details</a>
+    </div>
+    <div class="scroll-indicator">&#8595;</div>
+  </section>
+
+  <!-- HINDI BLESSING TICKER -->
+  <div class="blessing-ticker">
+    <div class="ticker-track">
+      <span>शुभ मंगल सावधान</span><span class="tick-dot">&#10022;</span>
+      <span>दो दिल, एक जान</span><span class="tick-dot">&#10022;</span>
+      <span>जहाँ प्रेम है, वहाँ भगवान है</span><span class="tick-dot">&#10022;</span>
+      <span>सर्वे भवन्तु सुखिनः</span><span class="tick-dot">&#10022;</span>
+      <span>हम साथ हैं, हम साथ रहेंगे</span><span class="tick-dot">&#10022;</span>
+      <span>प्यार का बंधन अटूट है</span><span class="tick-dot">&#10022;</span>
+      <span>तुम मेरे हो, मैं तुम्हारी</span><span class="tick-dot">&#10022;</span>
+      <span>शुभ मंगल सावधान</span><span class="tick-dot">&#10022;</span>
+      <span>दो दिल, एक जान</span><span class="tick-dot">&#10022;</span>
+      <span>जहाँ प्रेम है, वहाँ भगवान है</span><span class="tick-dot">&#10022;</span>
+      <span>सर्वे भवन्तु सुखिनः</span><span class="tick-dot">&#10022;</span>
+      <span>हम साथ हैं, हम साथ रहेंगे</span><span class="tick-dot">&#10022;</span>
+      <span>प्यार का बंधन अटूट है</span><span class="tick-dot">&#10022;</span>
+      <span>तुम मेरे हो, मैं तुम्हारी</span><span class="tick-dot">&#10022;</span>
+    </div>
+  </div>
+
+  <div class="ornament-sep"><span>&#10022;</span></div>
+
+  <!-- WEDDING -->
+  <section id="wedding">
+    <div class="wedding-bg-text">विवाह</div>
+
+    <h2 class="section-title">The Wedding</h2>
+    <p class="wedding-subtitle">Wednesday, December 2, 2026 &nbsp;·&nbsp; Sandhu Palace, Dholpur</p>
+
+    <div class="wedding-layout">
+
+      <!-- Main ceremony card -->
+      <div class="wedding-main-card">
+        <div class="flame-art">
+          <span class="flame f1">🔥</span>
+          <span class="flame f2">🔥</span>
+          <span class="flame f3">🔥</span>
+        </div>
+        <div class="havan-kund">
+          <span class="havan-om">ॐ</span>
+        </div>
+        <h3 class="wedding-card-title">Vivah Ceremony</h3>
+        <p class="wedding-card-sub">Auspicious Muhurat &nbsp;·&nbsp; December 2, 2026</p>
+        <div class="wedding-card-divider"></div>
+        <p class="wedding-dress">Dress Code &nbsp;·&nbsp; Traditional Formal</p>
+        <p class="wedding-venue-line">Sandhu Palace, Saipau Road, Dholpur</p>
+      </div>
+
+      <!-- Rituals column -->
+      <div class="rituals-column">
+        <p class="rituals-heading">Sacred Rituals</p>
+        <div class="ritual-list">
+          <div class="ritual-item">
+            <span class="ritual-icon">🪔</span>
+            <div>
+              <p class="ritual-name">Ganesh Puja</p>
+              <p class="ritual-desc">Invoking blessings for an auspicious beginning</p>
+            </div>
+          </div>
+          <div class="ritual-item">
+            <span class="ritual-icon">🔥</span>
+            <div>
+              <p class="ritual-name">Havan</p>
+              <p class="ritual-desc">Sacred fire ceremony — offerings to Agni Dev</p>
+            </div>
+          </div>
+          <div class="ritual-item">
+            <span class="ritual-icon">🌸</span>
+            <div>
+              <p class="ritual-name">Varmala</p>
+              <p class="ritual-desc">Exchange of floral garlands</p>
+            </div>
+          </div>
+          <div class="ritual-item">
+            <span class="ritual-icon">🌿</span>
+            <div>
+              <p class="ritual-name">Saptapadi</p>
+              <p class="ritual-desc">Seven sacred steps around the holy fire</p>
+            </div>
+          </div>
+          <div class="ritual-item">
+            <span class="ritual-icon">✨</span>
+            <div>
+              <p class="ritual-name">Sindoor &amp; Mangalsutra</p>
+              <p class="ritual-desc">Sealing the union with eternal symbols</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="ornament-sep"><span>&#10022;</span></div>
+
+  <!-- STORY -->
+  <section id="story">
+    <div class="story-inner">
+      <h2 class="section-title light">Our Story</h2>
+      <p class="story-label">Vivah &nbsp;·&nbsp; विवाह</p>
+      <span class="quote-mark">&ldquo;</span>
+      <p class="story-text">
+        Two families, guided by blessings and bound by tradition,
+        chose each other — and in that choice, chose love.
+        What elders envisioned, the heart confirmed.
+        Rajat and Riya begin their journey not just as two,
+        but as the joining of two families, two homes, one destiny.
+      </p>
+      <span class="quote-mark close">&ldquo;</span>
+      <div class="story-line"></div>
+      <p class="story-footer-quote">शुभ विवाह &nbsp;— &nbsp;An Auspicious Beginning</p>
+    </div>
+  </section>
+
+  <div class="ornament-sep" style="background:transparent;"><span>&#10022;</span></div>
+
+  <!-- MANTRAS / ASHIRWAD -->
+  <section id="mantras">
+    <div class="om-bg">ॐ</div>
+    <h2 class="section-title shimmer">आशीर्वाद</h2>
+    <p class="mantras-label">Ashirwad &nbsp;·&nbsp; Blessings</p>
+    <div class="mantra-list">
+
+      <div class="mantra-item">
+        <p class="mantra-sanskrit" data-typewriter="ॐ सर्वे भवन्तु सुखिनः।"></p>
+        <p class="mantra-roman">Om Sarve Bhavantu Sukhinah</p>
+        <p class="mantra-meaning">May all beings be happy, may all be free from suffering</p>
+      </div>
+      <div class="mantra-divider">&#10022;</div>
+
+      <div class="mantra-item">
+        <p class="mantra-sanskrit" data-typewriter="यत्र नार्यस्तु पूज्यन्ते, रमन्ते तत्र देवताः।"></p>
+        <p class="mantra-roman">Yatra Naryastu Pujyante, Ramante Tatra Devata</p>
+        <p class="mantra-meaning">Where women are honored, there the gods rejoice</p>
+      </div>
+      <div class="mantra-divider">&#10022;</div>
+
+      <div class="mantra-item">
+        <p class="mantra-sanskrit" data-typewriter="शुभ मंगल सावधान।"></p>
+        <p class="mantra-roman">Shubh Mangal Savdhan</p>
+        <p class="mantra-meaning">Be alert — an auspicious union is about to begin</p>
+      </div>
+      <div class="mantra-divider">&#10022;</div>
+
+      <div class="mantra-item">
+        <p class="mantra-sanskrit" data-typewriter="सा प्रथमा धर्मचारिणी।"></p>
+        <p class="mantra-roman">Saa Prathama Dharmacharini</p>
+        <p class="mantra-meaning">She is the first companion in the path of dharma</p>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="ornament-sep" style="background:transparent;"><span>&#10022;</span></div>
+
+  <!-- VENUE -->
+  <section id="venue">
+    <h2 class="section-title">The Venue</h2>
+    <div class="venue-layout">
+
+      <div class="venue-details">
+        <div class="venue-palace-name">Sandhu Palace</div>
+        <p class="venue-tagline">A celebration of love, set in royal Rajasthan</p>
+        <div class="venue-addr-block">
+          <p class="venue-addr-line">Saipau Road, Dholpur</p>
+          <p class="venue-addr-line">Rajasthan &nbsp;— &nbsp;328001</p>
+        </div>
+        <div class="venue-travel-block">
+          <p class="travel-heading">By Air</p>
+          <div class="travel-item">
+            <span class="travel-icon">✈</span>
+            <span>Gwalior Airport <span class="travel-code">(GWL)</span> &nbsp;— &nbsp;75 km 
+          </div>
+          <div class="travel-item">
+            <span class="travel-icon">✈</span>
+            <span>Agra Airport <span class="travel-code">(AGR)</span> &nbsp;— &nbsp;60 km &nbsp;<span class="travel-note">Nearest</span></span>
+          </div>
+          <div class="travel-item">
+            <span class="travel-icon">✈</span>
+            <span>Jaipur Airport <span class="travel-code">(JAI)</span> &nbsp;— &nbsp;270 km</span>
+          </div>
+          <div class="travel-item">
+            <span class="travel-icon">✈</span>
+            <span>Delhi Airport <span class="travel-code">(DEL)</span> &nbsp;— &nbsp;270 km</span>
+          </div>
+          <p class="travel-heading" style="margin-top:1rem;">By Rail &amp; Road</p>
+          <div class="travel-item">
+            <span class="travel-icon">🚂</span>
+            <span>Dholpur Junction — direct trains from Delhi &amp; Agra</span>
+          </div>
+          <div class="travel-item">
+            <span class="travel-icon">🚗</span>
+            <span>Delhi — ~270 km via Yamuna Expressway</span>
+          </div>
+          <div class="travel-item">
+            <span class="travel-icon">🚗</span>
+            <span>Agra — ~60 km via NH-44</span>
+          </div>
+        </div>
+        <a href="https://maps.app.goo.gl/58XZtwRF2GAZbzd46" target="_blank" class="map-link">
+          Get Directions &nbsp;&#8594;
+        </a>
+      </div>
+
+      <div class="venue-map-wrap">
+        <iframe
+          src="https://maps.google.com/maps?q=Sandhu+Palace+Saipau+Road+Dholpur+Rajasthan+328001&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          width="100%" height="100%"
+          style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="ornament-sep"><span>&#10022;</span></div>
+
+  <!-- RSVP -->
+  <section id="rsvp">
+    <h2 class="section-title">Will You Join Us?</h2>
+    <p class="rsvp-note">Fill in mobile for WhatsApp confirmation &nbsp;·&nbsp; email for a mail reply</p>
+    <form class="rsvp-form" onsubmit="handleRSVP(event)">
+      <input name="rsvp-name"    type="text"   placeholder="Your Name" required>
+      <input name="rsvp-mobile"  type="tel"    placeholder="Mobile Number (WhatsApp)">
+      <input name="rsvp-email"   type="email"  placeholder="Email Address (optional)">
+      <input name="rsvp-guests"  type="number" placeholder="Number of Guests" min="1" max="10">
+      <select name="rsvp-attending">
+        <option value="">Attending?</option>
+        <option value="Joyfully attending">Joyfully attending</option>
+        <option value="Unable to attend">Unable to attend</option>
+      </select>
+      <button type="submit">Send RSVP</button>
+    </form>
+    <p id="rsvp-thanks" class="rsvp-thanks hidden">
+      Thank you! We can't wait to celebrate with you. &#127800;
+    </p>
+  </section>
+
+  <!-- PHOTO WALL -->
+  <section id="photowall">
+    <h2 class="section-title">Our Moments</h2>
+    <div class="photowall-grid" id="photowall-grid"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-names">Rajat &amp; Riya</p>
+    <p class="footer-date">December 2, 2026 &nbsp;&#183;&nbsp; Dholpur, Rajasthan</p>
+    <p class="footer-quote">"Two souls, one journey"</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
