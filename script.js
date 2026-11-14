@@ -469,33 +469,27 @@ function handleRSVP(e) {
 
 
 // ===== BACKGROUND MUSIC =====
-var musicOn  = false;
-var ytFrame  = document.getElementById('yt-frame');
-
-function ytCmd(func) {
-  if (!ytFrame) return;
-  ytFrame.contentWindow.postMessage(
-    JSON.stringify({ event: 'command', func: func, args: [] }), '*'
-  );
-}
+var bgAudio = document.getElementById('bg-audio');
+bgAudio.volume = 0.65;
 
 function updateMusicBtn() {
   var btn  = document.getElementById('music-btn');
   var icon = document.getElementById('music-icon');
   if (!btn) return;
-  if (musicOn) {
-    btn.classList.add('playing');
-    icon.textContent = '⏸';
-    btn.title = 'Pause music';
-  } else {
-    btn.classList.remove('playing');
-    icon.textContent = '♫';
-    btn.title = 'Play music';
-  }
+  var playing = !bgAudio.paused;
+  btn.classList.toggle('playing', playing);
+  icon.textContent = playing ? '⏸' : '♫';
+  btn.title = playing ? 'Pause music' : 'Play music';
 }
 
 document.getElementById('music-btn').addEventListener('click', function () {
-  musicOn = !musicOn;
-  ytCmd(musicOn ? 'playVideo' : 'pauseVideo');
+  if (bgAudio.paused) {
+    bgAudio.play();
+  } else {
+    bgAudio.pause();
+  }
   updateMusicBtn();
 });
+
+bgAudio.addEventListener('play',  updateMusicBtn);
+bgAudio.addEventListener('pause', updateMusicBtn);
