@@ -486,7 +486,7 @@ function onYouTubeIframeAPIReady() {
     videoId: '3NIU8HwqGbk',
     playerVars: {
       start:    20,
-      autoplay: 1,   // tries on desktop; blocked on mobile until tap
+      autoplay: 0,
       loop:     1,
       playlist: '3NIU8HwqGbk',
       controls: 0,
@@ -498,7 +498,7 @@ function onYouTubeIframeAPIReady() {
       onReady: function (e) {
         musicReady = true;
         e.target.setVolume(65);
-        e.target.playVideo();
+        // Don't autoplay — user must click ♫ button (browser policy blocks autoplay with sound)
       },
       onStateChange: function (e) {
         musicOn = e.data === YT.PlayerState.PLAYING;
