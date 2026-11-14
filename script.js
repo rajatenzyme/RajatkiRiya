@@ -352,13 +352,15 @@ gsap.utils.toArray('.mantra-item').forEach((item, i) => {
     photos.forEach((src, i) => {
       const img  = document.createElement('img');
       img.src    = src;
-      const rot  = (sr(i * 3) - 0.5) * 10;
+      const rots = [3, -4, 2, -3, 5, -2, 4];
+      const rot  = rots[i % rots.length];
       img.style.cssText = `
+        position:relative;
         width:calc(50% - 5px);height:160px;
         object-fit:cover;border-radius:4px;
         transform:rotate(${rot}deg);opacity:0;
         box-shadow:0 4px 16px rgba(0,0,0,0.5);
-        flex-shrink:0;
+        flex-shrink:0;top:auto;left:auto;
       `;
       grid.appendChild(img);
       ScrollTrigger.create({

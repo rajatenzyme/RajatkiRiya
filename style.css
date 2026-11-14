@@ -1116,8 +1116,7 @@ footer {
   .venue-map-wrap    { height: 260px; }
   .venue-travel-block{ gap: 0.6rem; }
 
-  /* Photo wall */
-  .photowall-grid { height: 1200px; }
+  /* Photo wall — height controlled by JS flex layout */
 
   /* RSVP */
   .rsvp-form input,
