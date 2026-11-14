@@ -1048,8 +1048,8 @@ footer {
   .hero-sub   { font-size: 0.6rem; }
   .hero-invite{ font-size: 0.68rem; }
 
-  /* Hide collage wings on small screens — too cluttered */
-  #photo-collage { display: none; }
+  /* Collage on mobile: corner peeks handled in JS, keep container visible */
+  #photo-collage { display: block; }
 
   /* Countdown */
   .countdown     { gap: 0.15rem; margin: 1.6rem 0 1.4rem; }

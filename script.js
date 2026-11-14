@@ -20,9 +20,29 @@ window.addEventListener('load', function () {
     return x - Math.floor(x);
   }
 
-  // 10 photos per side = 20 total; shuffle through 7 source photos
+  const isMobile = window.innerWidth <= 600;
+
+  if (isMobile) {
+    // Mobile: show 4 small photos peeking at corners — 2 top, 2 bottom
+    const corners = [
+      { top: -20,          left: -30,          rot: 15,  w: 130, photo: 0 },
+      { top: -20,          left: heroW - 100,  rot: -12, w: 120, photo: 2 },
+      { top: heroH - 100,  left: -25,          rot: -10, w: 125, photo: 4 },
+      { top: heroH - 90,   left: heroW - 110,  rot: 14,  w: 130, photo: 6 % photos.length },
+    ];
+    corners.forEach(({ top, left, rot, w, photo }) => {
+      const img = document.createElement('img');
+      img.src   = photos[photo];
+      const h   = w * 1.3;
+      img.style.cssText = `width:${w}px;height:${h}px;top:${top}px;left:${left}px;transform:rotate(${rot}deg);opacity:0.85;`;
+      container.appendChild(img);
+    });
+    return;
+  }
+
+  // Desktop: full left/right wings
   const perSide = 10;
-  const wingW   = heroW * 0.32; // each wing is 32% of hero width
+  const wingW   = heroW * 0.32;
 
   for (let side = 0; side < 2; side++) {
     for (let j = 0; j < perSide; j++) {
@@ -31,32 +51,23 @@ window.addEventListener('load', function () {
       img.src   = photos[i % photos.length];
       img.loading = 'lazy';
 
-      const w   = 220 + sr(i * 7)  * 200;           // 220–420px
-      const h   = w   * (0.68 + sr(i * 11) * 0.55); // varying aspect
-      const rot = (sr(i * 3) - 0.5) * 28;            // –14° to +14°
-      const op  = 0.75 + sr(i * 5) * 0.25;           // 0.75–1.0 — full vivid
+      const w   = 220 + sr(i * 7)  * 200;
+      const h   = w   * (0.68 + sr(i * 11) * 0.55);
+      const rot = (sr(i * 3) - 0.5) * 28;
+      const op  = 0.75 + sr(i * 5) * 0.25;
 
-      // Distribute evenly across hero height with slight overlap
       const topBand   = (j / perSide) * (heroH + h * 0.4) - h * 0.2;
       const topJitter = (sr(i * 17) - 0.5) * heroH * 0.1;
       const top       = topBand + topJitter;
 
       let left;
       if (side === 0) {
-        // Left wing: some photos hang off left edge for depth
         left = -w * 0.4 + sr(i * 13) * (wingW - w * 0.2);
       } else {
-        // Right wing: start at 68% so it slightly overlaps center shadow
         left = heroW * 0.68 + sr(i * 13) * (wingW - w * 0.2);
       }
 
-      img.style.cssText = `
-        width:${w}px;height:${h}px;
-        top:${top}px;left:${left}px;
-        transform:rotate(${rot}deg);
-        opacity:${op};
-      `;
-
+      img.style.cssText = `width:${w}px;height:${h}px;top:${top}px;left:${left}px;transform:rotate(${rot}deg);opacity:${op};`;
       container.appendChild(img);
     }
   }
@@ -333,15 +344,41 @@ gsap.utils.toArray('.mantra-item').forEach((item, i) => {
     return x - Math.floor(x);
   }
 
-  const count = 7; // one of each photo
+  const isMobile = window.innerWidth <= 600;
+
+  if (isMobile) {
+    // Mobile: 2-column flex grid, no absolute positioning
+    Object.assign(grid.style, {
+      display: 'flex', flexWrap: 'wrap', gap: '10px',
+      height: 'auto', padding: '0 1rem', justifyContent: 'center',
+    });
+    photos.forEach((src, i) => {
+      const img  = document.createElement('img');
+      img.src    = src;
+      const rot  = (sr(i * 3) - 0.5) * 10;
+      img.style.cssText = `
+        width:calc(50% - 5px);height:160px;
+        object-fit:cover;border-radius:4px;
+        transform:rotate(${rot}deg);opacity:0;
+        box-shadow:0 4px 16px rgba(0,0,0,0.5);
+        flex-shrink:0;
+      `;
+      grid.appendChild(img);
+      ScrollTrigger.create({
+        trigger: grid, start: 'top 90%',
+        onEnter: () => gsap.to(img, { opacity: 1, duration: 0.5, delay: i * 0.08, ease: 'power2.out' })
+      });
+    });
+    return;
+  }
+
+  // Desktop: scattered absolute layout
   const gridW = grid.offsetWidth || 1100;
   const gridH = 600;
-
-  // Lay out all 7 in a loose scattered grid
-  const cols = [0, 1, 2, 3, 0, 1, 2];
-  const rows = [0, 0, 0, 0, 1, 1, 1];
-  const colW = gridW / 4;
-  const rowH = gridH / 2;
+  const cols  = [0, 1, 2, 3, 0, 1, 2];
+  const rows  = [0, 0, 0, 0, 1, 1, 1];
+  const colW  = gridW / 4;
+  const rowH  = gridH / 2;
 
   photos.forEach((src, i) => {
     const img = document.createElement('img');
@@ -358,19 +395,13 @@ gsap.utils.toArray('.mantra-item').forEach((item, i) => {
     img.style.cssText = `
       width:${w}px;height:${h}px;
       left:${Math.max(0, colX)}px;top:${Math.max(0, rowY)}px;
-      transform:rotate(${rot}deg);opacity:0;
-      z-index:${i + 1};
+      transform:rotate(${rot}deg);opacity:0;z-index:${i + 1};
     `;
-
     grid.appendChild(img);
 
-    // Scroll-triggered fade-in
     ScrollTrigger.create({
-      trigger: grid,
-      start: 'top 85%',
-      onEnter: () => gsap.to(img, {
-        opacity: op, duration: 0.7, delay: i * 0.1, ease: 'power2.out'
-      })
+      trigger: grid, start: 'top 85%',
+      onEnter: () => gsap.to(img, { opacity: op, duration: 0.7, delay: i * 0.1, ease: 'power2.out' })
     });
   });
 })();
@@ -390,13 +421,20 @@ function handleRSVP(e) {
   const guests    = (form['rsvp-guests'].value   || '1').trim();
   const attending = (form['rsvp-attending'].value|| 'Not specified').trim();
 
+  const attendIcon = attending.toLowerCase().includes('unable') ? '❌' : '✅';
+
   const msgBody =
-    `RSVP — Rajat & Riya Wedding (Dec 2, 2026)\n` +
-    `Name: ${name}\n` +
-    `Attending: ${attending}\n` +
-    `Guests: ${guests}\n` +
-    (mobile ? `Mobile: ${mobile}\n` : '') +
-    (email  ? `Email: ${email}\n`   : '');
+    `🌸 *Rajat & Riya — Wedding RSVP* 🌸\n` +
+    `━━━━━━━━━━━━━━━━━━\n\n` +
+    `👤 *Name:* ${name}\n` +
+    `${attendIcon} *Attending:* ${attending}\n` +
+    `👥 *Guests:* ${guests}\n` +
+    (mobile ? `📱 *Mobile:* ${mobile}\n` : ``) +
+    (email  ? `📧 *Email:* ${email}\n`  : ``) +
+    `\n━━━━━━━━━━━━━━━━━━\n` +
+    `📅 *Date:* Wednesday, December 2, 2026\n` +
+    `📍 *Venue:* Sandhu Palace, Dholpur\n\n` +
+    `_Sent from the wedding website_ 💍`;
 
   // Decide channel: prefer WhatsApp if mobile provided, else email
   if (mobile) {
