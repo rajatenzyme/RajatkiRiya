@@ -258,16 +258,22 @@ function checkReveal() {
       opacity: 0, duration: 0.6, ease: 'power2.inOut',
       onComplete: () => { scratchCanvas.style.pointerEvents = 'none'; }
     });
-    // Reveal countdown only after scratch
-    gsap.to('.countdown', { opacity: 1, y: 0, duration: 1, ease: 'power2.out', delay: 0.3 });
   }
 }
 
-scratchCanvas.addEventListener('mousedown',  () => { isScratching = true; });
+// Show countdown on very first touch of the scratch card
+let countdownRevealed = false;
+function revealCountdown() {
+  if (countdownRevealed) return;
+  countdownRevealed = true;
+  gsap.to('.countdown', { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' });
+}
+
+scratchCanvas.addEventListener('mousedown',  () => { isScratching = true; revealCountdown(); });
 scratchCanvas.addEventListener('mousemove',  scratch);
 scratchCanvas.addEventListener('mouseup',    () => { isScratching = false; });
 scratchCanvas.addEventListener('mouseleave', () => { isScratching = false; });
-scratchCanvas.addEventListener('touchstart', (e) => { isScratching = true; e.preventDefault(); }, { passive: false });
+scratchCanvas.addEventListener('touchstart', (e) => { isScratching = true; revealCountdown(); e.preventDefault(); }, { passive: false });
 scratchCanvas.addEventListener('touchmove',  scratch, { passive: false });
 scratchCanvas.addEventListener('touchend',   () => { isScratching = false; });
 
@@ -460,3 +466,64 @@ function handleRSVP(e) {
     }
   });
 }
+
+
+// ===== BACKGROUND MUSIC =====
+var ytPlayer    = null;
+var musicReady  = false;
+var musicOn     = false;
+
+// Inject YouTube IFrame API
+(function () {
+  var s = document.createElement('script');
+  s.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(s);
+})();
+
+// Called automatically by the API when ready
+function onYouTubeIframeAPIReady() {
+  ytPlayer = new YT.Player('yt-player', {
+    videoId: '3NIU8HwqGbk',
+    playerVars: {
+      start:    20,
+      autoplay: 1,   // tries on desktop; blocked on mobile until tap
+      loop:     1,
+      playlist: '3NIU8HwqGbk',
+      controls: 0,
+      disablekb: 1,
+      fs: 0,
+      rel: 0,
+    },
+    events: {
+      onReady: function (e) {
+        musicReady = true;
+        e.target.setVolume(65);
+        e.target.playVideo();
+      },
+      onStateChange: function (e) {
+        musicOn = e.data === YT.PlayerState.PLAYING;
+        updateMusicBtn();
+      },
+    },
+  });
+}
+
+function updateMusicBtn() {
+  var btn  = document.getElementById('music-btn');
+  var icon = document.getElementById('music-icon');
+  if (!btn) return;
+  if (musicOn) {
+    btn.classList.add('playing');
+    icon.textContent = '⏸';
+    btn.title = 'Pause music';
+  } else {
+    btn.classList.remove('playing');
+    icon.textContent = '♫';
+    btn.title = 'Play music';
+  }
+}
+
+document.getElementById('music-btn').addEventListener('click', function () {
+  if (!ytPlayer || !musicReady) return;
+  musicOn ? ytPlayer.pauseVideo() : ytPlayer.playVideo();
+});
