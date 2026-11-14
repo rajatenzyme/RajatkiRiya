@@ -162,7 +162,6 @@ gsap.timeline({ delay: 0.5 })
   .to('.hero-sub',       { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' })
   .to('.hero-names',     { opacity: 1, y: 0, duration: 1.1, ease: 'power2.out' }, '-=0.5')
   .to('.hero-invite',    { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.6')
-  .to('.countdown',      { opacity: 1,        duration: 0.8, ease: 'power2.out' }, '-=0.3')
   .to('.scratch-wrapper',{ opacity: 1, y: 0,  duration: 0.7, ease: 'power2.out' }, '-=0.4')
   .to('.cta-btn',        { opacity: 1,         duration: 0.6 }, '-=0.2');
 
@@ -259,6 +258,8 @@ function checkReveal() {
       opacity: 0, duration: 0.6, ease: 'power2.inOut',
       onComplete: () => { scratchCanvas.style.pointerEvents = 'none'; }
     });
+    // Reveal countdown only after scratch
+    gsap.to('.countdown', { opacity: 1, y: 0, duration: 1, ease: 'power2.out', delay: 0.3 });
   }
 }
 
